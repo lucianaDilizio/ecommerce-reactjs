@@ -34,12 +34,13 @@ const products = [
 export function getProducts() {
   return new Promise((resolve) =>
     setTimeout(
-      resolve({
-        success: true,
-        content: {
-          products: products,
-        },
-      }),
+      () =>
+        resolve({
+          success: true,
+          content: {
+            products: products,
+          },
+        }),
       1500,
     ),
   );
