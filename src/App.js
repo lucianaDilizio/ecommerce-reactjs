@@ -1,10 +1,9 @@
+import React from 'react';
+import { ProductList } from './components/ProductList/ProductList';
 import './App.css';
 
 function App() {
-  return (
-    <div>
-    </div>
-  );
+  return <ProductList />;
 }
 
 export default App;
