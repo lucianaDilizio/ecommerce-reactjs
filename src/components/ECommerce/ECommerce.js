@@ -10,6 +10,7 @@ export const ECommerce = () => {
     <>
       <Header>
         <SearchBar filterProducts={setFilter} />
+        <div className="logo">eCommerce</div>
       </Header>
       <ProductList filter={currentFilter.filter} />
     </>

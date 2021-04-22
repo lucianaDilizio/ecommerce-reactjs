@@ -23,3 +23,8 @@
   max-width: 980px;
   justify-content: center;
 }
+
+.logo {
+  font-size: 72px;
+  font-family: cursive;
+}
