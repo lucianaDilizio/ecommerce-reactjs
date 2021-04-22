@@ -1,14 +1,9 @@
 import React from 'react';
-import { ProductList } from './components/ProductList/ProductList';
 import './App.css';
-import { Header } from './components/Header/Header';
+import { ECommerce } from './components/ECommerce/ECommerce';
 
 function App() {
-  return (
-    <>
-      <Header /> <ProductList />
-    </>
-  );
+  return <ECommerce />;
 }
 
 export default App;

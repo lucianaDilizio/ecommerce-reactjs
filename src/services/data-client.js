@@ -49,14 +49,16 @@ const products = [
   },
 ];
 
-export function getProducts() {
+export function getProducts(filter) {
+  var regex = new RegExp(filter, 'gi');
+console.log(products);
   return new Promise((resolve) =>
     setTimeout(
       () =>
         resolve({
           success: true,
           content: {
-            products: products,
+            products: filter ? products.filter(product => product.name.match(regex)) : products,
           },
         }),
       1500,

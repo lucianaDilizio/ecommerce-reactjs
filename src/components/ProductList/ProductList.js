@@ -13,13 +13,13 @@ export const Product = ({ data }) => {
   );
 };
 
-export const ProductList = () => {
+export const ProductList = ({ filter }) => {
   const [state, setState] = useState({ loading: true });
 
   useEffect(() => {
     const fetchData = async () => {
       setState({ loading: true });
-      const responseProductsList = await getProducts();
+      const responseProductsList = await getProducts(filter);
       if (responseProductsList.success) {
         setState({
           productsList: responseProductsList.content.products,
@@ -28,7 +28,7 @@ export const ProductList = () => {
       }
     };
     fetchData();
-  }, []);
+  }, [filter]);
 
   return state.loading ? (
     <Loading />

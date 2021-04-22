@@ -1,13 +1,10 @@
 import React from 'react';
-import { SearchBar } from '../SearchBar/SearchBar';
 import './Header.css';
 
-export const Header = () => {
+export const Header = ({ children }) => {
   return (
     <div className="container header">
-      <div className="rowflex">
-        <SearchBar />
-      </div>
+      <div className="rowflex">{children}</div>
     </div>
   );
 };
