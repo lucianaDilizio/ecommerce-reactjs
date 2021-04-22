@@ -49,19 +49,23 @@ const products = [
   },
 ];
 
-export function getProducts(filter) {
-  var regex = new RegExp(filter, 'gi');
-console.log(products);
-  return new Promise((resolve) =>
-    setTimeout(
-      () =>
-        resolve({
-          success: true,
-          content: {
-            products: filter ? products.filter(product => product.name.match(regex)) : products,
-          },
-        }),
-      1500,
-    ),
-  );
-}
+export const hardcodedClientApi = {
+  getProducts: (filter) => {
+    var regex = new RegExp(filter, 'gi');
+
+    return new Promise((resolve) =>
+      setTimeout(
+        () =>
+          resolve({
+            success: true,
+            content: {
+              products: filter
+                ? products.filter((product) => product.name.match(regex))
+                : products,
+            },
+          }),
+        1500,
+      ),
+    );
+  },
+};

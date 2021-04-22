@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getProducts } from '../../services/data-client';
+import { hardcodedClientApi } from '../../services/data-client';
 import { Loading } from '../Loading/Loading';
 import './ProductList.css';
 
@@ -19,7 +19,7 @@ export const ProductList = ({ filter }) => {
   useEffect(() => {
     const fetchData = async () => {
       setState({ loading: true });
-      const responseProductsList = await getProducts(filter);
+      const responseProductsList = await hardcodedClientApi.getProducts(filter);
       if (responseProductsList.success) {
         setState({
           productsList: responseProductsList.content.products,
