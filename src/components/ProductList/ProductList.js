@@ -5,9 +5,10 @@ import './ProductList.css';
 
 export const Product = ({ data }) => {
   return (
-    <div className="productContainer" key={data.name}>
+    <div className="productContainer">
       <img style={{ width: 100 + '%' }} alt={data.name} src={data.imgUrl} />
-      {data.name}
+      <div>{data.name}</div>
+      <div>${data.price}</div>
     </div>
   );
 };
@@ -36,7 +37,7 @@ export const ProductList = () => {
       <div className="rowflex">
         <section className="col-sm-12">
           {state.productsList.map((product) => {
-            return <Product data={product} />;
+            return <Product key={product.id} data={product} />;
           })}
         </section>
       </div>
