@@ -1,0 +1,29 @@
+input[type='text'].search {
+  height: 36px;
+  border: 1px solid #ccc;
+  font-size: 15px;
+  padding: 0 10px;
+  color: #999;
+}
+
+.search:focus {
+  outline: none;
+}
+
+.searchBtn {
+  display: inline-block;
+  padding: 9px 12px;
+  font-size: 18px;
+  color: #b4b4b4;
+  border-radius: 0;
+  box-sizing: border-box;
+  border: 0;
+}
+
+.searchBtn:hover {
+  cursor: pointer;
+}
+
+.svg-search-icon {
+  width: 15px;
+}
