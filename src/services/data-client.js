@@ -1,7 +1,7 @@
 const products = [
   {
     id: 1,
-    name: 'PRODUCT 1',
+    name: 'BOLS MEDIANO',
     price: 100,
     creationDate: '2020-09-23',
     imgUrl:
@@ -9,7 +9,7 @@ const products = [
   },
   {
     id: 2,
-    name: 'PRODUCT 2',
+    name: 'ESPEJO DECORATIVO',
     price: 350,
     creationDate: '2019-05-10',
     imgUrl:
@@ -17,7 +17,7 @@ const products = [
   },
   {
     id: 3,
-    name: 'PRODUCT 3',
+    name: 'MASETA PEQUEÑA',
     price: 670,
     creationDate: '2021-01-15',
     imgUrl:
@@ -25,7 +25,7 @@ const products = [
   },
   {
     id: 4,
-    name: 'PRODUCT 4',
+    name: 'MASETA GRANDE',
     price: 290,
     creationDate: '2018-03-02',
     imgUrl:
@@ -33,7 +33,7 @@ const products = [
   },
   {
     id: 5,
-    name: 'PRODUCT 5',
+    name: 'MATE DE MADERA',
     price: 799,
     creationDate: '2020-10-24',
     imgUrl:
@@ -41,7 +41,7 @@ const products = [
   },
   {
     id: 6,
-    name: 'PRODUCT 6',
+    name: 'MASETA VINTAGE',
     price: 450,
     creationDate: '2020-09-23',
     imgUrl:
