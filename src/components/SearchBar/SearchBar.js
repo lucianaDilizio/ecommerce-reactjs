@@ -7,10 +7,10 @@ export const SearchBar = ({ filterProducts }) => {
       <form
         onSubmit={(event) => {
           event.preventDefault();
-          filterProducts({ filter: event.target[0].value });
+          filterProducts({ filter: event.target[0].value, type: 'text' });
         }}
       >
-        <input className="search" type="text" placeholder="Buscar..."></input>
+        <input className="search" type="text" placeholder="Search..."></input>
         <button type="submit" className="searchBtn">
           <div>
             <svg

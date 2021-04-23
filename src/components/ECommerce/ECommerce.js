@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
+import { Categories } from '../Categories/Categories';
 import { Header } from '../Header/Header';
 import { ProductList } from '../ProductList/ProductList';
 import { SearchBar } from '../SearchBar/SearchBar';
 
 export const ECommerce = () => {
-  const [currentFilter, setFilter] = useState({ filter: '' });
+  const [currentFilter, setFilter] = useState({ filter: '', type: 'text' });
 
   return (
     <>
@@ -12,7 +13,15 @@ export const ECommerce = () => {
         <SearchBar filterProducts={setFilter} />
         <div className="logo">eCommerce</div>
       </Header>
-      <ProductList filter={currentFilter.filter} />
+      <div className="container">
+        <div className="rowflex">
+          <Categories filterProducts={setFilter} />
+          <ProductList
+            filter={currentFilter.filter}
+            filterType={currentFilter.type}
+          />
+        </div>
+      </div>
     </>
   );
 };

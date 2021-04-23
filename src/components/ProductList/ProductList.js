@@ -13,13 +13,16 @@ export const Product = ({ data }) => {
   );
 };
 
-export const ProductList = ({ filter }) => {
+export const ProductList = ({ filter, filterType }) => {
   const [state, setState] = useState({ loading: true });
 
   useEffect(() => {
     const fetchData = async () => {
       setState({ loading: true });
-      const responseProductsList = await hardcodedClientApi.getProducts(filter);
+      const responseProductsList = await hardcodedClientApi.getProducts(
+        filter,
+        filterType,
+      );
       if (responseProductsList.success) {
         setState({
           productsList: responseProductsList.content.products,
@@ -28,19 +31,19 @@ export const ProductList = ({ filter }) => {
       }
     };
     fetchData();
-  }, [filter]);
+  }, [filter, filterType]);
 
-  return state.loading ? (
-    <Loading />
-  ) : (
-    <div className="container">
-      <div className="rowflex">
+  return (
+    <>
+      {state.loading ? (
+        <Loading />
+      ) : (
         <section className="col-sm-12">
           {state.productsList.map((product) => {
             return <Product key={product.id} data={product} />;
           })}
         </section>
-      </div>
-    </div>
+      )}
+    </>
   );
 };

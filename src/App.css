@@ -10,7 +10,6 @@
 }
 
 .rowflex {
-  flex-wrap: wrap;
   display: flex;
 }
 
@@ -20,11 +19,28 @@
   flex-direction: inherit;
   flex-wrap: wrap;
   width: fit-content;
-  max-width: 980px;
   justify-content: center;
 }
 
 .logo {
   font-size: 72px;
   font-family: cursive;
+}
+
+.categories-list {
+  min-width: 120px;
+}
+
+.categories-list ul {
+  padding: 0;
+}
+
+.categories-list ul li {
+  list-style: none;
+  padding: 5px 0 0 0;
+  cursor: pointer;
+}
+
+.categories-list h3 {
+  margin-top: 0;
 }
