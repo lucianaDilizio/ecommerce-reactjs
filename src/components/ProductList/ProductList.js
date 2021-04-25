@@ -14,7 +14,19 @@ export const Product = ({ data }) => {
 };
 
 export const ProductList = ({ filter, filterType }) => {
-  const [state, setState] = useState({ loading: true });
+  const [state, setState] = useState({
+    loading: true,
+    productsList: [
+      {
+        id: 0,
+        name: 'string',
+        price: 0,
+        creationDate: '1979-01-21',
+        category: 0,
+        imgUrl: 'string',
+      },
+    ],
+  });
 
   useEffect(() => {
     const fetchData = async () => {
