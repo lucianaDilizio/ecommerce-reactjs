@@ -15,7 +15,12 @@ export const ECommerce = () => {
       </Header>
       <div className="container">
         <div className="rowflex">
-          <Categories filterProducts={setFilter} />
+          <Categories
+            filterProducts={setFilter}
+            isSearchingByText={
+              currentFilter.type === 'text' && currentFilter.filter
+            }
+          />
           <ProductList
             filter={currentFilter.filter}
             filterType={currentFilter.type}

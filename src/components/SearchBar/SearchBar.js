@@ -9,9 +9,8 @@ export const SearchBar = ({ filterProducts }) => {
       placeholder="Search..."
       onChange={(event) => {
         var text = event.target.value;
-        text.length > 3
-          ? filterProducts({ filter: text, type: 'text' })
-          : filterProducts({ filter: '', type: 'text' });
+        text.length < 3 || filterProducts({ filter: text, type: 'text' });
+        text.length || filterProducts({ filter: '', type: 'text' });
       }}
     ></input>
   );

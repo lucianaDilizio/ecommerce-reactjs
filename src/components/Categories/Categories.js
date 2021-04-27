@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { hardcodedClientApi } from '../../services/data-client';
-import { Loading } from '../Loading/Loading';
 
-export const Categories = ({ filterProducts }) => {
-  const [state, setState] = useState({ loading: true });
+export const Categories = ({ filterProducts, isSearchingByText }) => {
+  const [state, setState] = useState({
+    loading: true,
+    categories: [{ id: 0, description: 'string' }],
+    selectedCategory: null,
+  });
 
   useEffect(() => {
     const fetchData = async () => {
@@ -11,38 +14,55 @@ export const Categories = ({ filterProducts }) => {
       const responseCategories = await hardcodedClientApi.getCategories();
       if (responseCategories.success) {
         setState({
-          categories: responseCategories.content.categories,
           loading: false,
+          categories: responseCategories.content.categories,
+          selectedCategory: null,
         });
       }
     };
     fetchData();
   }, []);
 
-  return state.loading ? (
-    <Loading />
-  ) : (
+  useEffect(() => {
+    if (isSearchingByText) {
+      setState({ ...state, selectedCategory: null });
+    }
+  }, [state, isSearchingByText]);
+
+  return (
     <>
       <section className="categories-list">
-        <h3>Categories</h3>
-        <ul>
-          <li
-            key="0"
-            onClick={() => filterProducts({ filter: '', type: 'text' })}
-          >
-            ALL PRODUCTS
-          </li>
-          {state.categories.map((category) => (
-            <li
-              onClick={() =>
-                filterProducts({ filter: category.id, type: 'category' })
-              }
-              key={category.id}
-            >
-              {category.description}
-            </li>
-          ))}
-        </ul>
+        {state.loading ? (
+          <></>
+        ) : (
+          <>
+            <h3>Categories</h3>
+            <ul>
+              <li
+                key="0"
+                onClick={() => {
+                  setState({ ...state, selectedCategory: null });
+                  filterProducts({ filter: '', type: 'text' });
+                }}
+              >
+                {!state.selectedCategory && !isSearchingByText ? '»' : <></>}{' '}
+                ALL PRODUCTS
+              </li>
+              {state.categories.map((category) => (
+                <li
+                  onClick={() => {
+                    setState({ ...state, selectedCategory: category.id });
+                    filterProducts({ filter: category.id, type: 'category' });
+                  }}
+                  key={category.id}
+                >
+                  {state.selectedCategory === category.id ? '»' : <></>}{' '}
+                  {category.description}
+                </li>
+              ))}
+            </ul>
+          </>
+        )}
       </section>
     </>
   );
