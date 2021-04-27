@@ -3,7 +3,9 @@ import './SearchBar.css';
 
 export const SearchBar = ({ filterProducts, isFilteringByCategory }) => {
   if (isFilteringByCategory) {
-    document.getElementById('productSearch').value = '';
+    if (document.getElementById('productSearch')) {
+      document.getElementById('productSearch').value = '';
+    }
   }
   return (
     <input
