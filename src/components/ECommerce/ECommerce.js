@@ -10,7 +10,12 @@ export const ECommerce = () => {
   return (
     <>
       <Header>
-        <SearchBar filterProducts={setFilter} />
+        <SearchBar
+          filterProducts={setFilter}
+          isFilteringByCategory={
+            currentFilter.type === 'category' || !currentFilter.filter
+          }
+        />
         <div className="logo">eCommerce</div>
       </Header>
       <div className="container">

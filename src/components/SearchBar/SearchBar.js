@@ -1,9 +1,13 @@
 import React from 'react';
 import './SearchBar.css';
 
-export const SearchBar = ({ filterProducts }) => {
+export const SearchBar = ({ filterProducts, isFilteringByCategory }) => {
+  if (isFilteringByCategory) {
+    document.getElementById('productSearch').value = '';
+  }
   return (
     <input
+      id="productSearch"
       className="search"
       type="text"
       placeholder="Search..."
