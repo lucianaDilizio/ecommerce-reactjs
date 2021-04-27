@@ -5,8 +5,9 @@ export const Categories = ({ filterProducts, isSearchingByText }) => {
   const [state, setState] = useState({
     loading: true,
     categories: [{ id: 0, description: 'string' }],
-    selectedCategory: null,
   });
+
+  const [selectedCategory, setSelectedCategory] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -16,7 +17,6 @@ export const Categories = ({ filterProducts, isSearchingByText }) => {
         setState({
           loading: false,
           categories: responseCategories.content.categories,
-          selectedCategory: null,
         });
       }
     };
@@ -25,9 +25,9 @@ export const Categories = ({ filterProducts, isSearchingByText }) => {
 
   useEffect(() => {
     if (isSearchingByText) {
-      setState({ ...state, selectedCategory: null });
+      setSelectedCategory(null);
     }
-  }, [state, isSearchingByText]);
+  }, [isSearchingByText]);
 
   return (
     <>
@@ -41,22 +41,23 @@ export const Categories = ({ filterProducts, isSearchingByText }) => {
               <li
                 key="0"
                 onClick={() => {
-                  setState({ ...state, selectedCategory: null });
                   filterProducts({ filter: '', type: 'text' });
+                  setSelectedCategory(null);
                 }}
               >
-                {!state.selectedCategory && !isSearchingByText ? '»' : <></>}{' '}
-                ALL PRODUCTS
+                {!selectedCategory && !isSearchingByText ? '»' : <></>} ALL
+                PRODUCTS
               </li>
               {state.categories.map((category) => (
                 <li
                   onClick={() => {
-                    setState({ ...state, selectedCategory: category.id });
                     filterProducts({ filter: category.id, type: 'category' });
+                    setSelectedCategory(category.id);
+                    console.log('IS SEARCHING BY TEXT', isSearchingByText);
                   }}
                   key={category.id}
                 >
-                  {state.selectedCategory === category.id ? '»' : <></>}{' '}
+                  {selectedCategory === category.id ? '»' : <></>}{' '}
                   {category.description}
                 </li>
               ))}
