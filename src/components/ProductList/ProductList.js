@@ -27,8 +27,9 @@ export const ProductList = ({ filter, filterType }) => {
         imgUrl: 'string',
       },
     ],
-    sortBy: 0,
   });
+
+  const [currentSorting, setCurrentSorting] = useState({ sortBy: 0 });
 
   useEffect(() => {
     const fetchData = async () => {
@@ -36,6 +37,7 @@ export const ProductList = ({ filter, filterType }) => {
       const responseProductsList = await hardcodedClientApi.getProducts(
         filter,
         filterType,
+        currentSorting.sortBy,
       );
       if (responseProductsList.success) {
         setState({
@@ -45,13 +47,17 @@ export const ProductList = ({ filter, filterType }) => {
       }
     };
     fetchData();
-  }, [filter, filterType]);
+  }, [filter, filterType, currentSorting]);
 
   return (
     <section className="productList-section">
-      <section className="sortingSection">
-        <SortProducts />
-      </section>
+      {filterType === 'category' || !filter ? (
+        <section className="sortingSection">
+          <SortProducts sortProducts={setCurrentSorting} />
+        </section>
+      ) : (
+        <></>
+      )}
       {state.loading ? (
         <Loading />
       ) : (

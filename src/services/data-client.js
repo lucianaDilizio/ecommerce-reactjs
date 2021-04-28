@@ -57,6 +57,10 @@ const products = [
 
 const categories = [
   {
+    id: 0,
+    description: 'ALL PRODUCTS',
+  },
+  {
     id: 1,
     description: 'RECIPIENTS',
   },
@@ -93,8 +97,56 @@ const sortingOptions = [
   },
 ];
 
+function sortAZ(a, b) {
+  if (a.name < b.name) {
+    return -1;
+  }
+  if (a.name > b.name) {
+    return 1;
+  }
+  return 0;
+}
+
+const sortZA = (a, b) => {
+  if (a.name > b.name) {
+    return -1;
+  }
+  if (a.name < b.name) {
+    return 1;
+  }
+  return 0;
+};
+
+const sort19 = (a, b) => {
+  if (a.price < b.price) {
+    return -1;
+  }
+  if (a.price > b.price) {
+    return 1;
+  }
+  return 0;
+};
+
+const sort91 = (a, b) => {
+  if (a.price > b.price) {
+    return -1;
+  }
+  if (a.price < b.price) {
+    return 1;
+  }
+  return 0;
+};
+console.log(products);
 export const hardcodedClientApi = {
-  getProducts: (filter, type) => {
+  getProducts: (filter, type, sortby) => {
+    console.log(
+      'el tipo es: ',
+      type,
+      ' y el sortby es: ',
+      sortby,
+      'y el filter es: ',
+      filter,
+    );
     switch (type) {
       case 'category':
         return new Promise((resolve) =>
@@ -103,9 +155,39 @@ export const hardcodedClientApi = {
               resolve({
                 success: true,
                 content: {
-                  products: products.filter(
-                    (product) => product.category === filter,
-                  ),
+                  products:
+                    sortby === 1
+                      ? products
+                          .filter(
+                            (product) =>
+                              product.category === filter || filter === 0,
+                          )
+                          .sort(sortAZ)
+                      : sortby === 2
+                      ? products
+                          .filter(
+                            (product) =>
+                              product.category === filter || filter === 0,
+                          )
+                          .sort(sortZA)
+                      : sortby === 3
+                      ? products
+                          .filter(
+                            (product) =>
+                              product.category === filter || filter === 0,
+                          )
+                          .sort(sort19)
+                      : sortby === 4
+                      ? products
+                          .filter(
+                            (product) =>
+                              product.category === filter || filter === 0,
+                          )
+                          .sort(sort91)
+                      : products.filter(
+                          (product) =>
+                            product.category === filter || filter === 0,
+                        ),
                 },
               }),
             1500,

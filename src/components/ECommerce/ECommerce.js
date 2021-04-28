@@ -5,7 +5,7 @@ import { ProductList } from '../ProductList/ProductList';
 import { SearchBar } from '../SearchBar/SearchBar';
 
 export const ECommerce = () => {
-  const [currentFilter, setFilter] = useState({ filter: '', type: 'text' });
+  const [currentFilter, setFilter] = useState({ filter: 0, type: 'category' });
 
   return (
     <>
@@ -23,7 +23,7 @@ export const ECommerce = () => {
           <Categories
             filterProducts={setFilter}
             isSearchingByText={
-              currentFilter.type === 'text' && currentFilter.filter
+              currentFilter.type === 'text' && currentFilter.filter !== ''
             }
           />
           <ProductList

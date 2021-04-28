@@ -26,6 +26,8 @@ export const Categories = ({ filterProducts, isSearchingByText }) => {
   useEffect(() => {
     if (isSearchingByText) {
       setSelectedCategory(null);
+    } else {
+      setSelectedCategory(0);
     }
   }, [isSearchingByText]);
 
@@ -38,22 +40,11 @@ export const Categories = ({ filterProducts, isSearchingByText }) => {
           <>
             <h3>Categories</h3>
             <ul>
-              <li
-                key="0"
-                onClick={() => {
-                  filterProducts({ filter: '', type: 'text' });
-                  setSelectedCategory(null);
-                }}
-              >
-                {!selectedCategory && !isSearchingByText ? '»' : <></>} ALL
-                PRODUCTS
-              </li>
               {state.categories.map((category) => (
                 <li
                   onClick={() => {
                     filterProducts({ filter: category.id, type: 'category' });
                     setSelectedCategory(category.id);
-                    console.log('IS SEARCHING BY TEXT', isSearchingByText);
                   }}
                   key={category.id}
                 >

@@ -16,7 +16,7 @@ export const SearchBar = ({ filterProducts, isFilteringByCategory }) => {
       onChange={(event) => {
         var text = event.target.value;
         text.length < 3 || filterProducts({ filter: text, type: 'text' });
-        text.length || filterProducts({ filter: '', type: 'text' });
+        text.length || filterProducts({ filter: 0, type: 'category' });
       }}
     ></input>
   );
