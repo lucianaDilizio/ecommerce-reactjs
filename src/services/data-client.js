@@ -74,6 +74,25 @@ const categories = [
   },
 ];
 
+const sortingOptions = [
+  {
+    id: 1,
+    description: '[A-Z]',
+  },
+  {
+    id: 2,
+    description: '[Z-A]',
+  },
+  {
+    id: 3,
+    description: 'Price: Low to Hight',
+  },
+  {
+    id: 4,
+    description: 'Price: Hight to Low',
+  },
+];
+
 export const hardcodedClientApi = {
   getProducts: (filter, type) => {
     switch (type) {
@@ -124,6 +143,21 @@ export const hardcodedClientApi = {
             },
           }),
         1500,
+      ),
+    );
+  },
+
+  getSortingOptions: () => {
+    return new Promise((resolve) =>
+      setTimeout(
+        () =>
+          resolve({
+            success: true,
+            content: {
+              sortingOptions: sortingOptions,
+            },
+          }),
+        0,
       ),
     );
   },
