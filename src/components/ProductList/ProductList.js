@@ -51,21 +51,23 @@ export const ProductList = ({ filter, filterType }) => {
 
   return (
     <section className="productList-section">
-      {filterType === 'category' || !filter ? (
-        <section className="sortingSection">
-          <SortProducts sortProducts={setCurrentSorting} />
-        </section>
-      ) : (
-        <></>
-      )}
       {state.loading ? (
         <Loading />
       ) : (
-        <section className="col-sm-12">
-          {state.productsList.map((product) => {
-            return <Product key={product.id} data={product} />;
-          })}
-        </section>
+        <>
+          {filterType === 'category' && state.productsList.length > 1 ? (
+            <section className="sortingSection">
+              <SortProducts sortProducts={setCurrentSorting} />
+            </section>
+          ) : (
+            <></>
+          )}
+          <section className="col-sm-12">
+            {state.productsList.map((product) => {
+              return <Product key={product.id} data={product} />;
+            })}
+          </section>
+        </>
       )}
     </section>
   );
