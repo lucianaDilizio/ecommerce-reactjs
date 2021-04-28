@@ -3,3 +3,31 @@
   text-align: center;
   margin: 0 12px 24px;
 }
+
+.sortingSection {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: 25px;
+  padding-bottom: 30px;
+}
+
+.sortingSection select {
+  height: 36px;
+  border: 1px solid #ccc;
+  font-size: 15px;
+  padding: 0 10px;
+  color: #999;
+}
+
+.sortingSection label {
+  margin-right: 15px;
+}
+
+.sortingSection select:focus {
+  outline: none;
+}
+
+.productList-section {
+  width: 100%;
+}

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { hardcodedClientApi } from '../../services/data-client';
 import { Loading } from '../Loading/Loading';
+import { SortProducts } from '../SortProducts/SortProducts';
 import './ProductList.css';
 
 export const Product = ({ data }) => {
@@ -26,6 +27,7 @@ export const ProductList = ({ filter, filterType }) => {
         imgUrl: 'string',
       },
     ],
+    sortBy: 0,
   });
 
   useEffect(() => {
@@ -46,7 +48,10 @@ export const ProductList = ({ filter, filterType }) => {
   }, [filter, filterType]);
 
   return (
-    <>
+    <section className="productList-section">
+      <section className="sortingSection">
+        <SortProducts />
+      </section>
       {state.loading ? (
         <Loading />
       ) : (
@@ -56,6 +61,6 @@ export const ProductList = ({ filter, filterType }) => {
           })}
         </section>
       )}
-    </>
+    </section>
   );
 };
