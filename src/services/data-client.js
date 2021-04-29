@@ -139,14 +139,6 @@ const sort91 = (a, b) => {
 console.log(products);
 export const hardcodedClientApi = {
   getProducts: (filter, type, sortby) => {
-    console.log(
-      'el tipo es: ',
-      type,
-      ' y el sortby es: ',
-      sortby,
-      'y el filter es: ',
-      filter,
-    );
     switch (type) {
       case 'category':
         return new Promise((resolve) =>

@@ -16,7 +16,7 @@ export const Product = ({ data }) => {
 
 export const ProductList = ({ filter, filterType }) => {
   const [state, setState] = useState({
-    loading: true,
+    loading: false,
     productsList: [
       {
         id: 0,
@@ -29,7 +29,7 @@ export const ProductList = ({ filter, filterType }) => {
     ],
   });
 
-  const [currentSorting, setCurrentSorting] = useState({ sortBy: 0 });
+  const [currentSorting, setCurrentSorting] = useState({ sortBy: 1 });
 
   useEffect(() => {
     const fetchData = async () => {
@@ -51,17 +51,24 @@ export const ProductList = ({ filter, filterType }) => {
 
   return (
     <section className="productList-section">
+      {filterType === 'category' ? (
+        state.loading || (!state.loading && state.productsList.length > 1) ? (
+          <section className="sortingSection">
+            <SortProducts
+              sortProducts={setCurrentSorting}
+              currentSorting={currentSorting.sortBy}
+            />
+          </section>
+        ) : (
+          <></>
+        )
+      ) : (
+        <></>
+      )}
       {state.loading ? (
         <Loading />
       ) : (
         <>
-          {filterType === 'category' && state.productsList.length > 1 ? (
-            <section className="sortingSection">
-              <SortProducts sortProducts={setCurrentSorting} />
-            </section>
-          ) : (
-            <></>
-          )}
           <section className="col-sm-12">
             {state.productsList.map((product) => {
               return <Product key={product.id} data={product} />;

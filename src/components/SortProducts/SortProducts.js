@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { hardcodedClientApi } from '../../services/data-client';
 
-export const SortProducts = ({ sortProducts }) => {
+export const SortProducts = ({ sortProducts, currentSorting }) => {
   const [state, setState] = useState({
     sortingOptions: [{ id: 0, description: 'string' }],
   });
@@ -26,12 +26,12 @@ export const SortProducts = ({ sortProducts }) => {
           return sortProducts({ sortBy: parseInt(event.target.value) });
         }}
       >
-        <option value="" disabled selected hidden>
-          Select an option...
-        </option>
         {state.sortingOptions.map((sortingOption) => {
           return (
-            <option value={sortingOption.id}>
+            <option
+              value={sortingOption.id}
+              selected={sortingOption.id === currentSorting}
+            >
               {sortingOption.description}
             </option>
           );
