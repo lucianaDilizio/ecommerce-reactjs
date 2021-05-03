@@ -22,8 +22,8 @@ export const ECommerce = () => {
         <div className="rowflex">
           <Categories
             filterProducts={setFilter}
-            isSearchingByText={
-              currentFilter.type === 'text' && currentFilter.filter !== ''
+            currentCategory={
+              currentFilter.type === 'category' ? currentFilter.filter : null
             }
           />
           <ProductList

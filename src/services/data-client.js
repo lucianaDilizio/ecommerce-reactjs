@@ -136,7 +136,7 @@ const sort91 = (a, b) => {
   }
   return 0;
 };
-console.log(products);
+
 export const hardcodedClientApi = {
   getProducts: (filter, type, sortby) => {
     switch (type) {

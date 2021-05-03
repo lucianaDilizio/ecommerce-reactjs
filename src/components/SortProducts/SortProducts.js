@@ -2,17 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { hardcodedClientApi } from '../../services/data-client';
 
 export const SortProducts = ({ sortProducts, currentSorting }) => {
-  const [state, setState] = useState({
-    sortingOptions: [{ id: 0, description: 'string' }],
-  });
+  const [sortingOptions, setSortingOptions] = useState([
+    { id: 0, description: 'string' },
+  ]);
 
   useEffect(() => {
     const fetchData = async () => {
       const responseSortingOptions = await hardcodedClientApi.getSortingOptions();
       if (responseSortingOptions.success) {
-        setState({
-          sortingOptions: responseSortingOptions.content.sortingOptions,
-        });
+        setSortingOptions(responseSortingOptions.content.sortingOptions);
       }
     };
     fetchData();
@@ -25,13 +23,11 @@ export const SortProducts = ({ sortProducts, currentSorting }) => {
         onChange={(event) => {
           return sortProducts({ sortBy: parseInt(event.target.value) });
         }}
+        value={currentSorting}
       >
-        {state.sortingOptions.map((sortingOption) => {
+        {sortingOptions.map((sortingOption) => {
           return (
-            <option
-              value={sortingOption.id}
-              selected={sortingOption.id === currentSorting}
-            >
+            <option key={sortingOption.id} value={sortingOption.id}>
               {sortingOption.description}
             </option>
           );
