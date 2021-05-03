@@ -3,6 +3,7 @@ import { Categories } from '../Categories/Categories';
 import { Header } from '../Header/Header';
 import { ProductList } from '../ProductList/ProductList';
 import { SearchBar } from '../SearchBar/SearchBar';
+import { Logo } from '../Logo/Logo';
 
 export const ECommerce = () => {
   const [currentFilter, setFilter] = useState({ filter: 0, type: 'category' });
@@ -10,13 +11,13 @@ export const ECommerce = () => {
   return (
     <>
       <Header>
+        <Logo />
         <SearchBar
           filterProducts={setFilter}
           isFilteringByCategory={
             currentFilter.type === 'category' || !currentFilter.filter
           }
         />
-        <div className="logo">eCommerce</div>
       </Header>
       <div className="container">
         <div className="rowflex">
