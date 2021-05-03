@@ -12,7 +12,7 @@ export const SearchBar = ({ filterProducts, isFilteringByCategory }) => {
       id="productSearch"
       className="search"
       type="text"
-      placeholder="Search..."
+      placeholder="Search product..."
       onChange={(event) => {
         var text = event.target.value;
         text.length < 3 || filterProducts({ filter: text, type: 'text' });
