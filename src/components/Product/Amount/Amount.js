@@ -7,9 +7,17 @@ export const Amount = () => {
 
   return (
     <div className="amount-container">
-      <button onClick={() => setMount(mount > 1 ? mount - 1 : mount)}>-</button>
+      <button
+        className="amount-action"
+        onClick={() => setMount(mount > 1 ? mount - 1 : mount)}
+      >
+        -
+      </button>
       <input id="amount-input" type="number" value={mount} readOnly></input>
-      <button onClick={() => setMount(mount < maxAmount ? mount + 1 : mount)}>
+      <button
+        className="amount-action"
+        onClick={() => setMount(mount < maxAmount ? mount + 1 : mount)}
+      >
         +
       </button>
     </div>

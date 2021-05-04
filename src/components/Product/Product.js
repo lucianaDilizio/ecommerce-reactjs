@@ -1,4 +1,5 @@
 import React from 'react';
+import { AddToCart } from './AddToCart/AddToCart';
 import { Amount } from './Amount/Amount';
 
 export const Product = ({ data }) => {
@@ -8,6 +9,7 @@ export const Product = ({ data }) => {
       <div>{data.name}</div>
       <div>${data.price}</div>
       <Amount />
+      <AddToCart />
     </div>
   );
 };

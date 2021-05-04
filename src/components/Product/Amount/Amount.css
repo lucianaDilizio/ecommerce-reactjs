@@ -15,7 +15,7 @@ input[id='amount-input'] {
   width: 36px;
   border: 1px solid #ccc;
   font-size: 15px;
-  color: #999;
+  color: #333;
   text-align: center;
   padding: 0;
 }
@@ -24,7 +24,7 @@ input[id='amount-input']:focus {
   outline: none;
 }
 
-button {
+.amount-action {
   height: 36px;
   width: 26px;
   outline: 1px solid #333;
@@ -32,6 +32,7 @@ button {
   color: #fff;
   background-color: #333;
   text-align: center;
+  cursor: pointer;
 }
 
 .amount-container {
