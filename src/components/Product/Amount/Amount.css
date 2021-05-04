@@ -1,0 +1,39 @@
+/* Chrome, Safari, Edge, Opera */
+input[id='amount-input']::-webkit-outer-spin-button,
+input[id='amount-input']::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type='number'][id='amount-input'] {
+  -moz-appearance: textfield;
+}
+
+input[id='amount-input'] {
+  height: 36px;
+  width: 36px;
+  border: 1px solid #ccc;
+  font-size: 15px;
+  color: #999;
+  text-align: center;
+  padding: 0;
+}
+
+input[id='amount-input']:focus {
+  outline: none;
+}
+
+button {
+  height: 36px;
+  width: 26px;
+  outline: 1px solid #333;
+  font-size: 15px;
+  color: #fff;
+  background-color: #333;
+  text-align: center;
+}
+
+.amount-container {
+  margin-top: 10px;
+}
