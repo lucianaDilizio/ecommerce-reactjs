@@ -39,3 +39,8 @@
 .categories-list h3 {
   margin-top: 0;
 }
+
+.right-header-elements {
+  display: flex;
+  align-items: center;
+}

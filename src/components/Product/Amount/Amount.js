@@ -1,22 +1,30 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Amount.css';
 
-export const Amount = () => {
-  const [mount, setMount] = useState(1);
+export const Amount = ({ handlerAmount }) => {
+  const [amount, setAmount] = useState(1);
   const maxAmount = 10;
+
+  useEffect(() => {
+    handlerAmount(amount);
+  }, [amount, handlerAmount]);
 
   return (
     <div className="amount-container">
       <button
         className="amount-action"
-        onClick={() => setMount(mount > 1 ? mount - 1 : mount)}
+        onClick={() => {
+          setAmount(amount > 1 ? amount - 1 : amount);
+        }}
       >
         -
       </button>
-      <input id="amount-input" type="number" value={mount} readOnly></input>
+      <input id="amount-input" type="number" value={amount} readOnly></input>
       <button
         className="amount-action"
-        onClick={() => setMount(mount < maxAmount ? mount + 1 : mount)}
+        onClick={() => {
+          setAmount(amount < maxAmount ? amount + 1 : amount);
+        }}
       >
         +
       </button>

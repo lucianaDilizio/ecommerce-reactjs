@@ -1,0 +1,19 @@
+.cart-element {
+  width: 50px;
+}
+
+.globe {
+  background-color: red;
+  border-radius: 100%;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  font-size: 13px;
+  color: #fff;
+  position: absolute;
+  margin-left: 35px;
+}
+
+.cart-content {
+  display: flex;
+}

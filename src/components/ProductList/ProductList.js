@@ -6,7 +6,7 @@ import { Product } from '../Product/Product';
 import { SortProducts } from '../SortProducts/SortProducts';
 import './ProductList.css';
 
-export const ProductList = ({ filter, filterType }) => {
+export const ProductList = ({ filter, filterType, handlerProductToAdd }) => {
   const [productList, setProductList] = useState([
     {
       id: 0,
@@ -62,7 +62,13 @@ export const ProductList = ({ filter, filterType }) => {
         <>
           <section className="col-sm-12">
             {productList.map((product) => {
-              return <Product key={product.id} data={product} />;
+              return (
+                <Product
+                  key={product.id}
+                  data={product}
+                  handlerProductToAdd={handlerProductToAdd}
+                />
+              );
             })}
           </section>
         </>
