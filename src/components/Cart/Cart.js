@@ -6,9 +6,18 @@ export const Cart = ({ productToAdd }) => {
 
   useEffect(() => {
     if (productToAdd.id) {
-      setProducts((product) => [...product, productToAdd]);
+      const exitedProduct = products.findIndex(
+        (product) => product.id === productToAdd.id,
+      );
+      if (exitedProduct >= 0) {
+        var updatedProducts = products;
+        updatedProducts[exitedProduct].amount += productToAdd.amount;
+        setProducts(updatedProducts);
+      } else {
+        setProducts((product) => [...product, productToAdd]);
+      }
     }
-  }, [productToAdd]);
+  }, [productToAdd, products]);
 
   return (
     <div className="cart-content">
