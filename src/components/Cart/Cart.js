@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import { NoProductsFound } from '../NoProductsFound/NoProductsFound';
+import { Popup } from '../Popup/Popup';
+import { Amount } from '../Product/Amount/Amount';
 import './Cart.css';
 
 export const Cart = ({ productToAdd }) => {
   const [products, setProducts] = useState([]);
+  const [showPopup, setShowPopup] = useState(false);
 
   useEffect(() => {
     if (productToAdd.id) {
@@ -11,7 +15,7 @@ export const Cart = ({ productToAdd }) => {
           (product) => product.id === productToAdd.id,
         );
         if (indexExitedProduct >= 0) {
-          products[indexExitedProduct].amount += productToAdd.amount;
+          products[indexExitedProduct].amount = productToAdd.amount;
           return [...products];
         }
         return [...products, productToAdd];
@@ -25,7 +29,103 @@ export const Cart = ({ productToAdd }) => {
         alt="cart"
         className="cart-element"
         src="https://static.thenounproject.com/png/2332-200.png"
+        onClick={() => setShowPopup(!showPopup)}
       />
+      {showPopup ? (
+        <Popup handleShowPopup={setShowPopup}>
+          {products.length ? (
+            <>
+              <div className="detail-container">
+                <table className="product-list">
+                  <thead className="product-list-header">
+                    <tr>
+                      <td>PRODUCT</td>
+                      <td>SUBTOTAL</td>
+                    </tr>
+                  </thead>
+                  <tbody className="product-list-body">
+                    {products.map((product) => (
+                      <tr key={product.id}>
+                        <td>
+                          <table className="product-list-datail">
+                            <tbody>
+                              <tr>
+                                <td>{product.name}</td>
+                              </tr>
+                              <tr>
+                                <td>${product.price}</td>
+                              </tr>
+                              <tr>
+                                <td>
+                                  <Amount
+                                    handlerAmount={(amount) => {
+                                      setProducts((products) => {
+                                        var indexExitedProduct = products.findIndex(
+                                          (productIndex) =>
+                                            productIndex.id === product.id,
+                                        );
+                                        if (indexExitedProduct >= 0) {
+                                          products[
+                                            indexExitedProduct
+                                          ].amount = amount;
+                                        }
+                                        return [...products];
+                                      });
+                                    }}
+                                    defaultValue={product.amount}
+                                  />
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </td>
+                        <td>
+                          {product.amount
+                            ? '$' + product.amount * product.price
+                            : ''}
+                        </td>
+                        <td>
+                          <span
+                            onClick={() =>
+                              setProducts((products) => {
+                                var indexExitedProduct = products.findIndex(
+                                  (productIndex) =>
+                                    productIndex.id === product.id,
+                                );
+
+                                if (indexExitedProduct >= 0) {
+                                  products.splice(indexExitedProduct, 1);
+                                }
+                                return [...products];
+                              })
+                            }
+                          >
+                            X
+                          </span>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              <div className="total-container">
+                TOTAL: $
+                {products
+                  .map((product) =>
+                    product.amount ? product.price * product.amount : 0,
+                  )
+                  .reduce(
+                    (acumulator, currentValue) => acumulator + currentValue,
+                  )}
+              </div>
+            </>
+          ) : (
+            <NoProductsFound />
+          )}
+        </Popup>
+      ) : (
+        <></>
+      )}
       {products.length ? (
         <span className="globe">
           {products

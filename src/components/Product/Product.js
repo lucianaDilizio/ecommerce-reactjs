@@ -9,7 +9,7 @@ export const Product = ({ data, handlerProductToAdd }) => {
       <img style={{ width: 100 + '%' }} alt={data.name} src={data.imgUrl} />
       <div>{data.name}</div>
       <div>${data.price}</div>
-      <Amount handlerAmount={setAmount} />
+      <Amount handlerAmount={setAmount} defaultValue={1} />
       <button
         className="add-button"
         onClick={() =>

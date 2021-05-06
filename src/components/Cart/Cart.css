@@ -1,5 +1,6 @@
 .cart-element {
   width: 50px;
+  cursor: pointer;
 }
 
 .globe {
@@ -16,4 +17,37 @@
 
 .cart-content {
   display: flex;
+}
+
+.detail-container {
+  overflow: scroll;
+  height: 300px;
+  overflow-x: hidden;
+}
+
+.product-list {
+  width: 100%;
+  border-spacing: 0;
+}
+
+.product-list-header {
+  font-size: 20px;
+}
+
+.product-list-header td,
+.product-list-body td {
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 15px;
+  padding-top: 15px;
+}
+
+.product-list-datail td {
+  border: none;
+  padding: 0;
+}
+
+.total-container {
+  float: right;
+  margin: 36px;
+  font-size: 21px;
 }
