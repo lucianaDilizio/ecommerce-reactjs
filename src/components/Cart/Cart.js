@@ -85,7 +85,7 @@ export const Cart = ({ productToAdd }) => {
                             : ''}
                         </td>
                         <td>
-                          <span
+                          <span className="delete-icon" title="Delete item"
                             onClick={() =>
                               setProducts((products) => {
                                 var indexExitedProduct = products.findIndex(

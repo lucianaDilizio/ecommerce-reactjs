@@ -51,3 +51,10 @@
   margin: 36px;
   font-size: 21px;
 }
+
+.delete-icon {
+  font-size: 20px;
+  font-weight: 700;
+  color: #ff0000;
+  cursor: pointer;
+}
