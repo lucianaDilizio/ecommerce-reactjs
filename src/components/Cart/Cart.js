@@ -15,7 +15,7 @@ export const Cart = ({ productToAdd }) => {
           (product) => product.id === productToAdd.id,
         );
         if (indexExitedProduct >= 0) {
-          products[indexExitedProduct].amount = productToAdd.amount;
+          products[indexExitedProduct].amount += productToAdd.amount;
           return [...products];
         }
         return [...products, productToAdd];
@@ -86,7 +86,8 @@ export const Cart = ({ productToAdd }) => {
                                     handlerAmount={(amount) =>
                                       updateProductAmount(amount, product.id)
                                     }
-                                    defaultValue={product.amount}
+                                    defaultValue={1}
+                                    updatedValue={product.amount}
                                   />
                                 </td>
                               </tr>

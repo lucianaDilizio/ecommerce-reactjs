@@ -1,8 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Amount.css';
 
-export const Amount = ({ handlerAmount, defaultValue }) => {
+export const Amount = ({ handlerAmount, defaultValue, updatedValue }) => {
   const [amount, setAmount] = useState(defaultValue);
+
+  useEffect(()=>{
+    setAmount(updatedValue);
+  }, [updatedValue])
 
   return (
     <div className="amount-container">
