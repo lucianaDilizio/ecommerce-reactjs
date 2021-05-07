@@ -11,7 +11,7 @@ export const Cart = ({ productToAdd }) => {
   useEffect(() => {
     if (productToAdd.id) {
       setProducts((products) => {
-        var indexExitedProduct = products.findIndex(
+        let indexExitedProduct = products.findIndex(
           (product) => product.id === productToAdd.id,
         );
         if (indexExitedProduct >= 0) {
@@ -22,6 +22,31 @@ export const Cart = ({ productToAdd }) => {
       });
     }
   }, [productToAdd]);
+
+  const deleteProduct = (id) => {
+    setProducts((products) => {
+      var indexExitedProduct = products.findIndex(
+        (productIndex) => productIndex.id === id,
+      );
+
+      if (indexExitedProduct >= 0) {
+        products.splice(indexExitedProduct, 1);
+      }
+      return [...products];
+    });
+  };
+
+  const updateProductAmount = (amount, id) => {
+    setProducts((products) => {
+      var indexExitedProduct = products.findIndex(
+        (productIndex) => productIndex.id === id,
+      );
+      if (indexExitedProduct >= 0) {
+        products[indexExitedProduct].amount = amount;
+      }
+      return [...products];
+    });
+  };
 
   return (
     <div className="cart-content">
@@ -58,20 +83,9 @@ export const Cart = ({ productToAdd }) => {
                               <tr>
                                 <td>
                                   <Amount
-                                    handlerAmount={(amount) => {
-                                      setProducts((products) => {
-                                        var indexExitedProduct = products.findIndex(
-                                          (productIndex) =>
-                                            productIndex.id === product.id,
-                                        );
-                                        if (indexExitedProduct >= 0) {
-                                          products[
-                                            indexExitedProduct
-                                          ].amount = amount;
-                                        }
-                                        return [...products];
-                                      });
-                                    }}
+                                    handlerAmount={(amount) =>
+                                      updateProductAmount(amount, product.id)
+                                    }
                                     defaultValue={product.amount}
                                   />
                                 </td>
@@ -85,20 +99,10 @@ export const Cart = ({ productToAdd }) => {
                             : ''}
                         </td>
                         <td>
-                          <span className="delete-icon" title="Delete item"
-                            onClick={() =>
-                              setProducts((products) => {
-                                var indexExitedProduct = products.findIndex(
-                                  (productIndex) =>
-                                    productIndex.id === product.id,
-                                );
-
-                                if (indexExitedProduct >= 0) {
-                                  products.splice(indexExitedProduct, 1);
-                                }
-                                return [...products];
-                              })
-                            }
+                          <span
+                            className="delete-icon"
+                            title="Delete item"
+                            onClick={() => deleteProduct(product.id)}
                           >
                             X
                           </span>
