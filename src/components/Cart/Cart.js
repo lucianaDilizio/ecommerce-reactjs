@@ -1,52 +1,13 @@
 import React, { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
 import { NoProductsFound } from '../NoProductsFound/NoProductsFound';
 import { Popup } from '../Popup/Popup';
 import { Amount } from '../Product/Amount/Amount';
+import { updateAmount, removeFromCart } from '../actions';
 import './Cart.css';
 
-export const Cart = ({ productToAdd }) => {
-  const [products, setProducts] = useState([]);
+const Cart = ({ cart, updateAmount, removeFromCart }) => {
   const [showPopup, setShowPopup] = useState(false);
-
-  useEffect(() => {
-    if (productToAdd.id) {
-      setProducts((products) => {
-        let indexExitedProduct = products.findIndex(
-          (product) => product.id === productToAdd.id,
-        );
-        if (indexExitedProduct >= 0) {
-          products[indexExitedProduct].amount += productToAdd.amount;
-          return [...products];
-        }
-        return [...products, productToAdd];
-      });
-    }
-  }, [productToAdd]);
-
-  const deleteProduct = (id) => {
-    setProducts((products) => {
-      var indexExitedProduct = products.findIndex(
-        (productIndex) => productIndex.id === id,
-      );
-
-      if (indexExitedProduct >= 0) {
-        products.splice(indexExitedProduct, 1);
-      }
-      return [...products];
-    });
-  };
-
-  const updateProductAmount = (amount, id) => {
-    setProducts((products) => {
-      var indexExitedProduct = products.findIndex(
-        (productIndex) => productIndex.id === id,
-      );
-      if (indexExitedProduct >= 0) {
-        products[indexExitedProduct].amount = amount;
-      }
-      return [...products];
-    });
-  };
 
   return (
     <div className="cart-content">
@@ -58,7 +19,7 @@ export const Cart = ({ productToAdd }) => {
       />
       {showPopup ? (
         <Popup handleShowPopup={setShowPopup}>
-          {products.length ? (
+          {cart.length ? (
             <>
               <div className="detail-container">
                 <table className="product-list">
@@ -69,7 +30,7 @@ export const Cart = ({ productToAdd }) => {
                     </tr>
                   </thead>
                   <tbody className="product-list-body">
-                    {products.map((product) => (
+                    {cart.map((product) => (
                       <tr key={product.id}>
                         <td>
                           <table className="product-list-datail">
@@ -84,7 +45,7 @@ export const Cart = ({ productToAdd }) => {
                                 <td>
                                   <Amount
                                     handlerAmount={(amount) =>
-                                      updateProductAmount(amount, product.id)
+                                      updateAmount(product.id, amount)
                                     }
                                     defaultValue={1}
                                     updatedValue={product.amount}
@@ -103,7 +64,7 @@ export const Cart = ({ productToAdd }) => {
                           <span
                             className="delete-icon"
                             title="Delete item"
-                            onClick={() => deleteProduct(product.id)}
+                            onClick={() => removeFromCart(product.id)}
                           >
                             X
                           </span>
@@ -115,7 +76,7 @@ export const Cart = ({ productToAdd }) => {
               </div>
               <div className="total-container">
                 TOTAL: $
-                {products
+                {cart
                   .map((product) =>
                     product.amount ? product.price * product.amount : 0,
                   )
@@ -131,9 +92,9 @@ export const Cart = ({ productToAdd }) => {
       ) : (
         <></>
       )}
-      {products.length ? (
+      {cart.length ? (
         <span className="globe">
-          {products
+          {cart
             .map((product) => product.amount)
             .reduce((acumulator, currentValue) => acumulator + currentValue)}
         </span>
@@ -143,3 +104,9 @@ export const Cart = ({ productToAdd }) => {
     </div>
   );
 };
+
+const mapStateToProps = (state) => {
+  return { cart: state.cart };
+};
+
+export default connect(mapStateToProps, { updateAmount, removeFromCart })(Cart);
