@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { hardcodedClientApi } from '../../services/data-client';
 import { Loading } from '../Loading/Loading';
 import { NoProductsFound } from '../NoProductsFound/NoProductsFound';
-import { Product } from '../Product/Product';
+import Product from '../Product/Product';
 import { SortProducts } from '../SortProducts/SortProducts';
 import './ProductList.css';
 
-export const ProductList = ({ filter, filterType, handlerProductToAdd }) => {
+export const ProductList = ({ filter, filterType }) => {
   const [productList, setProductList] = useState([
     {
       id: 0,
@@ -62,13 +62,7 @@ export const ProductList = ({ filter, filterType, handlerProductToAdd }) => {
         <>
           <section className="col-sm-12">
             {productList.map((product) => {
-              return (
-                <Product
-                  key={product.id}
-                  data={product}
-                  handlerProductToAdd={handlerProductToAdd}
-                />
-              );
+              return <Product key={product.id} data={product} />;
             })}
           </section>
         </>

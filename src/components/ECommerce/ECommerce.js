@@ -4,11 +4,10 @@ import { Header } from '../Header/Header';
 import { ProductList } from '../ProductList/ProductList';
 import { SearchBar } from '../SearchBar/SearchBar';
 import { Logo } from '../Logo/Logo';
-import { Cart } from '../Cart/Cart';
+import Cart from '../Cart/Cart';
 
 export const ECommerce = () => {
   const [currentFilter, setFilter] = useState({ filter: 0, type: 'category' });
-  const [productToAdd, setProductToAdd] = useState({});
 
   return (
     <>
@@ -21,7 +20,7 @@ export const ECommerce = () => {
               currentFilter.type === 'category' || !currentFilter.filter
             }
           />
-          <Cart productToAdd={productToAdd} />
+          <Cart />
         </div>
       </Header>
       <div className="container">
@@ -35,7 +34,6 @@ export const ECommerce = () => {
           <ProductList
             filter={currentFilter.filter}
             filterType={currentFilter.type}
-            handlerProductToAdd={setProductToAdd}
           />
         </div>
       </div>
