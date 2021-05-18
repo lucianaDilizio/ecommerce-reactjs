@@ -1,26 +1,10 @@
-export const addToCart = (product) => {
-  return {
-    type: 'ADD_TO_CART',
-    product: {
-      id: product.id,
-      name: product.name,
-      price: product.price,
-      amount: product.amount,
-    },
-  };
-};
+import cartActions from './cartActions';
+import filtersActions from './filtersActions';
 
-export const removeFromCart = (id) => {
-  return {
-    type: 'REMOVE_FROM_CART',
-    productId: id,
-  };
-};
+//Cart actions
+export const addToCart = cartActions.addToCart;
+export const removeFromCart = cartActions.removeFromCart;
+export const updateAmount = cartActions.updateAmount;
 
-export const updateAmount = (productId, amount) => {
-  return {
-    type: 'UPDATE_PRODUCT_AMOUNT',
-    productId: productId,
-    amount: amount,
-  };
-};
+//Filter actions
+export const updateFilter = filtersActions.updateFilter;
