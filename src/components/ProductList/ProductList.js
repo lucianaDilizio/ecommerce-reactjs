@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
 import { hardcodedClientApi } from '../../services/data-client';
 import { Loading } from '../Loading/Loading';
 import { NoProductsFound } from '../NoProductsFound/NoProductsFound';
@@ -6,7 +7,7 @@ import Product from '../Product/Product';
 import { SortProducts } from '../SortProducts/SortProducts';
 import './ProductList.css';
 
-export const ProductList = ({ filter, filterType }) => {
+const ProductList = ({ selectedFilter }) => {
   const [productList, setProductList] = useState([
     {
       id: 0,
@@ -17,17 +18,16 @@ export const ProductList = ({ filter, filterType }) => {
       imgUrl: 'string',
     },
   ]);
-
   const [loading, setLoading] = useState(false);
-
   const [currentSorting, setCurrentSorting] = useState({ sortBy: 1 });
 
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
+      console.log(selectedFilter);
       const responseProductsList = await hardcodedClientApi.getProducts(
-        filter,
-        filterType,
+        selectedFilter.filter,
+        selectedFilter.type,
         currentSorting.sortBy,
       );
       if (responseProductsList.success) {
@@ -36,13 +36,13 @@ export const ProductList = ({ filter, filterType }) => {
       }
     };
     fetchData();
-  }, [filter, filterType, currentSorting]);
+  }, [selectedFilter, currentSorting]);
 
   if (!productList.length) return <NoProductsFound />;
 
   return (
     <section className="productList-section">
-      {filterType === 'category' ? (
+      {selectedFilter.type === 'category' ? (
         loading || (!loading && productList.length > 1) ? (
           <section className="sortingSection">
             <SortProducts
@@ -70,3 +70,11 @@ export const ProductList = ({ filter, filterType }) => {
     </section>
   );
 };
+
+const mapStateToProps = (state) => {
+  return {
+    selectedFilter: state.filter,
+  };
+};
+
+export default connect(mapStateToProps)(ProductList);

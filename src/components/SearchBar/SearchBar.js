@@ -1,8 +1,10 @@
 import React from 'react';
 import './SearchBar.css';
+import { updateFilter } from '../actions';
+import { connect } from 'react-redux';
 
-export const SearchBar = ({ filterProducts, isFilteringByCategory }) => {
-  if (isFilteringByCategory) {
+const SearchBar = ({ selectedFilter, updateFilter }) => {
+  if (selectedFilter.type === 'category') {
     if (document.getElementById('productSearch')) {
       document.getElementById('productSearch').value = '';
     }
@@ -15,9 +17,17 @@ export const SearchBar = ({ filterProducts, isFilteringByCategory }) => {
       placeholder="Search product..."
       onChange={(event) => {
         var text = event.target.value;
-        text.length < 3 || filterProducts({ filter: text, type: 'text' });
-        text.length || filterProducts({ filter: 0, type: 'category' });
+        text.length < 3 || updateFilter({ filter: text, type: 'text' });
+        text.length || updateFilter({ filter: 0, type: 'category' });
       }}
     ></input>
   );
 };
+
+const mapStateToProps = (state) => {
+  return {
+    selectedFilter: state.filter,
+  };
+};
+
+export default connect(mapStateToProps, { updateFilter })(SearchBar);

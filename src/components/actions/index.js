@@ -1,6 +1,10 @@
-import actions from './cartActions';
+import cartActions from './cartActions';
+import filtersActions from './filtersActions';
 
 //Cart actions
-export const addToCart = actions.addToCart;
-export const removeFromCart = actions.removeFromCart;
-export const updateAmount = actions.updateAmount;
+export const addToCart = cartActions.addToCart;
+export const removeFromCart = cartActions.removeFromCart;
+export const updateAmount = cartActions.updateAmount;
+
+//Filter actions
+export const updateFilter = filtersActions.updateFilter;
