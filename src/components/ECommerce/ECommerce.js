@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Categories from '../Categories/Categories';
 import { Header } from '../Header/Header';
 import ProductList from '../ProductList/ProductList';

@@ -1,6 +1,6 @@
 export default (currentCart = [], action) => {
   switch (action.type) {
-    case 'ADD_TO_CART':
+    case 'ADD_TO_CART': {
       let productAlreadyExistIndex = currentCart.findIndex(
         (product) => product.id === action.payload.id,
       );
@@ -15,6 +15,7 @@ export default (currentCart = [], action) => {
       } else {
         return [...currentCart, action.payload];
       }
+    }
     case 'REMOVE_FROM_CART':
       return currentCart.filter((product) => product.id !== action.payload);
     case 'UPDATE_PRODUCT_AMOUNT':
