@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const NoProductsFound = () => {
+export default function NoProductsFound() {
   return (
     <div className="container">
       <div className="rowflex">
@@ -10,4 +10,4 @@ export const NoProductsFound = () => {
       </div>
     </div>
   );
-};
+}

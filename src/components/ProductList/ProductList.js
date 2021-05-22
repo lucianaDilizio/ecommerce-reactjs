@@ -1,30 +1,36 @@
 import React, { useEffect, useState } from 'react';
-import { connect } from 'react-redux';
-import { Loading } from '../Loading/Loading';
-import { NoProductsFound } from '../NoProductsFound/NoProductsFound';
+import { useSelector, useDispatch } from 'react-redux';
+import { getProducts } from '../actions/productsListActions';
+import NoProductsFound from '../NoProductsFound/NoProductsFound';
 import Product from '../Product/Product';
-import { SortProducts } from '../SortProducts/SortProducts';
-import { getProducts } from '../actions';
 import './ProductList.css';
 
-const ProductList = ({ selectedFilter, getProducts, productsList }) => {
+const ProductList = () => {
+  const dispatch = useDispatch();
   const [currentSorting, setCurrentSorting] = useState({ sortBy: 1 });
 
-  useEffect(() => {
-    getProducts(
-      selectedFilter.filter,
-      selectedFilter.type,
-      currentSorting.sortBy,
-    );
-  }, [selectedFilter, currentSorting]);
+  const { filter, type } = useSelector(
+    (state) => state.filter
+  );
+  const { list, loading } = useSelector(
+    (state) => state.products
+  );
 
-  if (!productsList.length && !productsList.loading) return <NoProductsFound />;
+  useEffect(() => {
+    dispatch(getProducts(
+      filter,
+      type,
+      currentSorting.sortBy,
+    ));
+  }, [currentSorting]);
+
+  if (loading) return <NoProductsFound />;
 
   return (
     <section className="productList-section">
-      {selectedFilter.type === 'category' ? (
-        productsList.loading ||
-        (!productsList.loading && productsList.length > 1) ? (
+      {type === 'category' ? (
+        loading ||
+        (!loading && list.length > 1) ? (
           <section className="sortingSection">
             <SortProducts
               sortProducts={setCurrentSorting}
@@ -37,12 +43,12 @@ const ProductList = ({ selectedFilter, getProducts, productsList }) => {
       ) : (
         <></>
       )}
-      {productsList.loading ? (
+      {list.loading ? (
         <Loading />
       ) : (
         <>
           <section className="col-sm-12">
-            {productsList.map((product) => {
+            {list.map((product) => {
               return <Product key={product.id} data={product} />;
             })}
           </section>
@@ -52,11 +58,4 @@ const ProductList = ({ selectedFilter, getProducts, productsList }) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    selectedFilter: state.filter,
-    productsList: state.productsList,
-  };
-};
-
-export default connect(mapStateToProps, { getProducts })(ProductList);
+export default ProductList;
