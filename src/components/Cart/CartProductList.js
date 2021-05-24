@@ -1,12 +1,14 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { NoProductsFound } from '../NoProductsFound/NoProductsFound';
+import { useDispatch, useSelector } from 'react-redux';
+import NoProductsFound from '../NoProductsFound/NoProductsFound';
 import { Amount } from '../Product/Amount/Amount';
-import { updateAmount, removeFromCart } from '../actions';
+import { updateAmount, removeFromCart } from '../actions/cartActions';
 import './Cart.css';
 
-const CartProductList = ({ cart, updateAmount, removeFromCart }) => {
-  if (!cart.length) return <NoProductsFound />;
+const CartProductList = () => {
+  const { currentCart } = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
+  if (!currentCart.length) return <NoProductsFound />;
   return (
     <>
       <div className="detail-container">
@@ -18,7 +20,7 @@ const CartProductList = ({ cart, updateAmount, removeFromCart }) => {
             </tr>
           </thead>
           <tbody className="product-list-body">
-            {cart.map((product) => (
+            {currentCart.map((product) => (
               <tr key={product.id}>
                 <td>
                   <table className="product-list-datail">
@@ -33,7 +35,7 @@ const CartProductList = ({ cart, updateAmount, removeFromCart }) => {
                         <td>
                           <Amount
                             handlerAmount={(amount) =>
-                              updateAmount(product.id, amount)
+                              dispatch(updateAmount(product.id, amount))
                             }
                             defaultValue={1}
                             updatedValue={product.amount}
@@ -50,7 +52,7 @@ const CartProductList = ({ cart, updateAmount, removeFromCart }) => {
                   <span
                     className="delete-icon"
                     title="Delete item"
-                    onClick={() => removeFromCart(product.id)}
+                    onClick={() => dispatch(removeFromCart(product.id))}
                   >
                     X
                   </span>
@@ -62,7 +64,7 @@ const CartProductList = ({ cart, updateAmount, removeFromCart }) => {
       </div>
       <div className="total-container">
         TOTAL: $
-        {cart
+        {currentCart
           .map((product) =>
             product.amount ? product.price * product.amount : 0,
           )
@@ -72,10 +74,4 @@ const CartProductList = ({ cart, updateAmount, removeFromCart }) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return { cart: state.cart };
-};
-
-export default connect(mapStateToProps, { updateAmount, removeFromCart })(
-  CartProductList,
-);
+export default CartProductList;

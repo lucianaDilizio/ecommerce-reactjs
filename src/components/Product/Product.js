@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
-import { addToCart } from '../actions';
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../actions/cartActions';
 import { Amount } from './Amount/Amount';
 import './Product.css';
 
-const Product = ({ addToCart, data }) => {
+const Product = ({ data }) => {
   const [amount, setAmount] = useState(1);
+  const dispatch = useDispatch();
   return (
     <div className="productContainer">
       <img style={{ width: 100 + '%' }} alt={data.name} src={data.imgUrl} />
@@ -19,12 +20,14 @@ const Product = ({ addToCart, data }) => {
       <button
         className="add-button"
         onClick={() => {
-          addToCart({
-            id: data.id,
-            name: data.name,
-            amount: amount,
-            price: data.price,
-          });
+          dispatch(
+            addToCart({
+              id: data.id,
+              name: data.name,
+              amount: amount,
+              price: data.price,
+            }),
+          );
           setAmount(1);
         }}
       >
@@ -34,4 +37,4 @@ const Product = ({ addToCart, data }) => {
   );
 };
 
-export default connect(null, { addToCart })(Product);
+export default Product;
