@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import { connect } from 'react-redux';
 import { hardcodedClientApi } from '../../services/data-client';
-import { updateFilter } from '../actions';
+import { updateFilter } from '../actions/filtersActions';
+import { useSelector, useDispatch } from 'react-redux';
 
-const Categories = ({ selectedFilter, updateFilter }) => {
+const Categories = () => {
   const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
+  const { currentFilter } = useSelector((state) => state.filter);
+  const [selectedCategory, setSelectedCategory] = useState(
+    currentFilter.filter,
+  );
   const [categories, setCategories] = useState([
     { id: 0, description: 'string' },
   ]);
-  const [selectedCategory, setSelectedCategory] = useState(
-    selectedFilter.filter,
-  );
 
   useEffect(() => {
     const fetchData = async () => {
@@ -25,8 +27,8 @@ const Categories = ({ selectedFilter, updateFilter }) => {
   }, []);
 
   useEffect(() => {
-    setSelectedCategory(selectedFilter.filter);
-  }, [selectedFilter.filter]);
+    setSelectedCategory(currentFilter.filter);
+  }, [currentFilter]);
 
   return (
     <>
@@ -40,7 +42,9 @@ const Categories = ({ selectedFilter, updateFilter }) => {
               {categories.map((category) => (
                 <li
                   onClick={() => {
-                    updateFilter({ filter: category.id, type: 'category' });
+                    dispatch(
+                      updateFilter({ filter: category.id, type: 'category' }),
+                    );
                     setSelectedCategory(category.id);
                   }}
                   key={category.id}
@@ -57,10 +61,4 @@ const Categories = ({ selectedFilter, updateFilter }) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    selectedFilter: state.filter,
-  };
-};
-
-export default connect(mapStateToProps, { updateFilter })(Categories);
+export default Categories;
