@@ -43,7 +43,7 @@ const ProductList = () => {
       ) : (
         <></>
       )}
-      {list.loading ? (
+      {loading ? (
         <Loading />
       ) : (
         <>
