@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import { Popup } from '../Popup/Popup';
 import './Cart.css';
 import CartProductList from './CartProductList';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 
-const Cart = ({ cart }) => {
+const Cart = () => {
+  const { currentCart } = useSelector((state) => state.cart);
   const [showPopup, setShowPopup] = useState(false);
 
   return (
@@ -22,9 +23,9 @@ const Cart = ({ cart }) => {
       ) : (
         <></>
       )}
-      {cart.length ? (
+      {currentCart.length ? (
         <span className="globe">
-          {cart
+          {currentCart
             .map((product) => product.amount)
             .reduce((acumulator, currentValue) => acumulator + currentValue)}
         </span>
@@ -35,8 +36,4 @@ const Cart = ({ cart }) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return { cart: state.cart };
-};
-
-export default connect(mapStateToProps)(Cart);
+export default Cart;
