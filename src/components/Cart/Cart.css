@@ -47,9 +47,12 @@
 }
 
 .total-container {
-  float: right;
-  margin: 36px;
+  margin: 36px 0;
   font-size: 21px;
+}
+
+.payment-button-container {
+  margin: 36px 0;
 }
 
 .delete-icon {
@@ -57,4 +60,10 @@
   font-weight: 700;
   color: #ff0000;
   cursor: pointer;
+}
+
+.cart-footer {
+  align-items: center;
+  justify-content: space-between;
+  display: flex;
 }
