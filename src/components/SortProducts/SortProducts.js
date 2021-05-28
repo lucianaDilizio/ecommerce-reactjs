@@ -14,6 +14,7 @@ export const SortProducts = ({ sortProducts, currentSorting }) => {
       }
     };
     fetchData();
+    return () => setSortingOptions([]);
   }, []);
 
   return (

@@ -1,6 +1,13 @@
-.payment-section {
-  height: 100vh;
-  display: flex;
-  flex: 1;
+h1.ui.center.header {
+  padding: 3em 0em;
+}
+
+.background {
+  position: relative;
+  height: 100%;
   background-color: #ddd;
+}
+
+.ui.grid.container {
+  background-color: #fff;
 }
