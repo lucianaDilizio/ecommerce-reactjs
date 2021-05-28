@@ -2,6 +2,7 @@ import {
   ADD_TO_CART,
   REMOVE_FROM_CART,
   UPDATE_PRODUCT_AMOUNT,
+  EMPTY_CART,
 } from '../actions/cartActions';
 const initialState = { currentCart: [] };
 
@@ -42,6 +43,9 @@ export default (state = initialState, action) => {
         return product;
       });
       return { ...state, currentCart: updatedProduct };
+    }
+    case EMPTY_CART: {
+      return { ...state, currentCart: [] };
     }
     default:
       return state;
