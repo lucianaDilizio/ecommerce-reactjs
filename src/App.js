@@ -6,7 +6,7 @@ import reducers from './components/reducers';
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import { BrowserRouter, Route } from 'react-router-dom';
-import { Payment } from './components/Payment/Payment';
+import Payment from './components/Payment/Payment';
 
 const store = createStore(
   reducers,

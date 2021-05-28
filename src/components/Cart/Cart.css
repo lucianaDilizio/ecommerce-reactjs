@@ -17,6 +17,7 @@
 
 .cart-content {
   display: flex;
+  margin-left: 30px;
 }
 
 .detail-container {

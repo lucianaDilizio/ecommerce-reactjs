@@ -65,7 +65,7 @@ const CartProductList = () => {
       </div>
       <div className="cart-footer">
         <div className="payment-button-container">
-          <Link to="/payment" className="general-button">
+          <Link to="/payment" className="ui green button">
             PROCEED TO CHECKOUT
           </Link>
         </div>
