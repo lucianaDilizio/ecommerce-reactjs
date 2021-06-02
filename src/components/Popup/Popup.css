@@ -1,6 +1,6 @@
 .popup-wrapper {
   width: 100%;
-  position: absolute;
+  position: fixed;
   overflow: hidden;
   height: 100%;
   top: 0;

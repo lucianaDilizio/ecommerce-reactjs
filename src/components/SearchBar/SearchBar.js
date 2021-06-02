@@ -1,5 +1,4 @@
 import React from 'react';
-import './SearchBar.css';
 import { updateFilter } from '../actions/filtersActions';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -12,18 +11,22 @@ const SearchBar = () => {
     }
   }
   return (
-    <input
-      id="productSearch"
-      className="search"
-      type="text"
-      placeholder="Search product..."
-      onChange={(event) => {
-        var text = event.target.value;
-        text.length < 3 ||
-          dispatch(updateFilter({ filter: text, type: 'text' }));
-        text.length || dispatch(updateFilter({ filter: 0, type: 'category' }));
-      }}
-    ></input>
+    <div className="ui icon input">
+      <input
+        id="productSearch"
+        className="search"
+        type="text"
+        placeholder="Search product..."
+        onChange={(event) => {
+          var text = event.target.value;
+          text.length < 3 ||
+            dispatch(updateFilter({ filter: text, type: 'text' }));
+          text.length ||
+            dispatch(updateFilter({ filter: 0, type: 'category' }));
+        }}
+      ></input>
+      <i className="search icon"></i>
+    </div>
   );
 };
 

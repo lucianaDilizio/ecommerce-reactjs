@@ -1,6 +1,7 @@
 export const ADD_TO_CART = 'ADD_TO_CART';
 export const REMOVE_FROM_CART = 'REMOVE_FROM_CART';
 export const UPDATE_PRODUCT_AMOUNT = 'UPDATE_PRODUCT_AMOUNT';
+export const EMPTY_CART = 'EMPTY_CART';
 
 export const addToCart = (product) => {
   return {
@@ -25,5 +26,11 @@ export const updateAmount = (productId, amount) => {
   return {
     type: UPDATE_PRODUCT_AMOUNT,
     payload: { productId, amount },
+  };
+};
+
+export const emptyCart = () => {
+  return {
+    type: EMPTY_CART,
   };
 };

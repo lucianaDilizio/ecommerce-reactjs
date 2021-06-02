@@ -2,8 +2,14 @@ html {
   min-height: 100%;
   position: relative;
 }
+html,
 body {
   height: 100%;
+}
+
+#root {
+  height: 100%;
+  margin: 0;
 }
 
 /* width */
@@ -71,4 +77,17 @@ body {
 .right-header-elements {
   display: flex;
   align-items: center;
+}
+
+.general-button {
+  margin-top: 10px;
+  padding: 12px;
+  border: none;
+  color: #fff;
+  background-color: #38609f;
+  font-weight: 400;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  text-decoration: none;
 }

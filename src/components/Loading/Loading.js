@@ -5,7 +5,7 @@ export const Loading = () => {
     <div className="container">
       <div className="rowflex">
         <section className="col-sm-12">
-          <div>Loading...</div>
+          <div class="ui active centered inline loader"></div>
         </section>
       </div>
     </div>
