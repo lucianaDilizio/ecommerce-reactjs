@@ -1,26 +1,3 @@
-const categories = [
-  {
-    id: 0,
-    description: 'ALL PRODUCTS',
-  },
-  {
-    id: 1,
-    description: 'RECIPIENTS',
-  },
-  {
-    id: 2,
-    description: 'MATES',
-  },
-  {
-    id: 3,
-    description: 'FLOWERPOTS',
-  },
-  {
-    id: 4,
-    description: 'DECORATION',
-  },
-];
-
 const sortingOptions = [
   {
     id: 1,
@@ -98,18 +75,16 @@ export const hardcodedClientApi = {
   },
 
   getCategories: () => {
-    return new Promise((resolve) =>
-      setTimeout(
-        () =>
-          resolve({
-            success: true,
-            content: {
-              categories: categories,
-            },
-          }),
-        1500,
-      ),
-    );
+    return fetch('https://60b6edcd17d1dc0017b889b5.mockapi.io/categories')
+      .then((response) => response.json())
+      .then((categories) => {
+        return {
+          success: true,
+          content: {
+            categories: [{ id: 0, description: 'ALL PRODUCTS' }, ...categories],
+          },
+        };
+      });
   },
 
   getSortingOptions: () => {
