@@ -44,7 +44,7 @@ const ProductList = () => {
         <></>
       )}
       <>
-        <section className="col-sm-12">
+        <section className="col-sm-12 static-container">
           {list.map((product) => {
             return <Product key={product.id} data={product} />;
           })}
