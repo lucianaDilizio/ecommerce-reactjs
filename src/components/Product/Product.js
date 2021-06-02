@@ -10,7 +10,9 @@ const Product = ({ data }) => {
   return (
     <div className="productContainer">
       <img className="ui small image" src={data.image} />
-      <div>{data.name}</div>
+      <div className="ellipsis-conatiner" title={data.name}>
+        {data.name}
+      </div>
       <div>${data.price}</div>
       <Amount
         handlerAmount={setAmount}
