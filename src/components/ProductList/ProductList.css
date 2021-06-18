@@ -2,6 +2,7 @@
   width: 185px;
   text-align: center;
   margin: 0 12px 24px;
+  text-transform: uppercase;
 }
 
 .sortingSection {
@@ -30,4 +31,11 @@
 
 .productList-section {
   width: 100%;
+}
+
+.static-container {
+  height: 600px;
+  overflow: scroll;
+  overflow-x: hidden;
+  min-width: 100%;
 }

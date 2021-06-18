@@ -9,8 +9,10 @@ const Product = ({ data }) => {
   const dispatch = useDispatch();
   return (
     <div className="productContainer">
-      <img style={{ width: 100 + '%' }} alt={data.name} src={data.imgUrl} />
-      <div>{data.name}</div>
+      <img className="ui small image" src={data.image} />
+      <div className="ellipsis-conatiner" title={data.name}>
+        {data.name}
+      </div>
       <div>${data.price}</div>
       <Amount
         handlerAmount={setAmount}
