@@ -10,7 +10,6 @@ import './ProductList.css';
 const ProductList = () => {
   const dispatch = useDispatch();
   const [currentSorting, setCurrentSorting] = useState({ sortBy: 1 });
-
   const { currentFilter } = useSelector((state) => state.filter);
   const { list, loading } = useSelector((state) => state.products);
 
@@ -22,7 +21,7 @@ const ProductList = () => {
         currentSorting.sortBy,
       ),
     );
-  }, [currentSorting, currentFilter]);
+  }, [currentSorting, currentFilter.filter, currentFilter.type]);
 
   if (loading) return <Loading />;
   if (!list.length) return <NoProductsFound />;
