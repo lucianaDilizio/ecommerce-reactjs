@@ -5,13 +5,16 @@ import { SortProducts } from '../SortProducts/SortProducts';
 import NoProductsFound from '../NoProductsFound/NoProductsFound';
 import { Loading } from '../Loading/Loading';
 import Product from '../Product/Product';
+import { IProduct, IFilterState, IProductsState } from '../../models';
 import './ProductList.css';
 
 const ProductList = () => {
   const dispatch = useDispatch();
   const [currentSorting, setCurrentSorting] = useState({ sortBy: 1 });
-  const { currentFilter } = useSelector((state) => state.filter);
-  const { list, loading } = useSelector((state) => state.products);
+  const { currentFilter } = useSelector((state: IFilterState) => state.filter);
+  const { list, loading } = useSelector(
+    (state: IProductsState) => state.products,
+  );
 
   useEffect(() => {
     dispatch(
@@ -44,8 +47,8 @@ const ProductList = () => {
       )}
       <>
         <section className="col-sm-12 static-container">
-          {list.map((product) => {
-            return <Product key={product.id} data={product} />;
+          {list.map((product: IProduct) => {
+            return <Product key={product.id} {...product} />;
           })}
         </section>
       </>

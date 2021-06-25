@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../actions/cartActions';
 import { Amount } from './Amount/Amount';
+import { IProduct } from '../../models';
 import './Product.css';
 
-const Product = ({ data }) => {
+const Product = ({ ...data }: IProduct) => {
   const [amount, setAmount] = useState(1);
   const dispatch = useDispatch();
   return (
