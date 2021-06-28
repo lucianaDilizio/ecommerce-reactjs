@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Redirect } from 'react-router';
 import './Payment.css';
 import { useDispatch } from 'react-redux';
@@ -8,9 +8,13 @@ const PaymentSuccessful = () => {
   const [redirect, setRedirect] = useState(false);
   const dispatch = useDispatch();
 
-  setTimeout(() => {
-    setRedirect(true);
-  }, 3000);
+  useEffect(() => {
+    const timeId = setTimeout(() => {
+      setRedirect(true);
+    }, 3000);
+
+    return () => clearTimeout(timeId);
+  }, []);
 
   if (redirect) {
     dispatch(emptyCart());
