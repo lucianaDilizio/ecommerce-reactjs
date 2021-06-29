@@ -10,11 +10,13 @@ export const ECommerce = () => {
   return (
     <>
       <Header>
-        <Logo />
-        <div className="right-header-elements">
-          <SearchBar />
-          <Cart />
-        </div>
+        <>
+          <Logo />
+          <div className="right-header-elements">
+            <SearchBar />
+            <Cart />
+          </div>
+        </>
       </Header>
       <div className="container">
         <div className="rowflex">

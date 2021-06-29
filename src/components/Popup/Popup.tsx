@@ -1,7 +1,13 @@
 import React from 'react';
 import './Popup.css';
 
-export const Popup = ({ children, handleShowPopup }) => {
+export const Popup = ({
+  children,
+  handleShowPopup,
+}: {
+  children: React.FC<{}>;
+  handleShowPopup: (argument: boolean) => void;
+}) => {
   return (
     <div className="popup-wrapper">
       <div className="popup-container">

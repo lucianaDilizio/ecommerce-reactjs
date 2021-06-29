@@ -1,12 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import './Amount.css';
 
-export const Amount = ({ handlerAmount, defaultValue, updatedValue }) => {
+interface IProps {
+  handlerAmount: (argument: number) => void;
+  defaultValue: number;
+  updatedValue: number;
+}
+
+export const Amount = ({
+  handlerAmount,
+  defaultValue,
+  updatedValue,
+}: IProps) => {
   const [amount, setAmount] = useState(defaultValue);
 
-  useEffect(()=>{
+  useEffect(() => {
     setAmount(updatedValue);
-  }, [updatedValue])
+  }, [updatedValue]);
+
+  const dispatchHandlerAmount = (newAmount: number) => {
+    !newAmount ? handlerAmount(1) : handlerAmount(newAmount);
+  };
 
   return (
     <div className="amount-container">
@@ -15,7 +29,7 @@ export const Amount = ({ handlerAmount, defaultValue, updatedValue }) => {
         onClick={() => {
           const newAmount = amount > 1 ? amount - 1 : amount;
           setAmount(newAmount);
-          handlerAmount(newAmount);
+          dispatchHandlerAmount(newAmount);
         }}
       >
         -
@@ -27,13 +41,13 @@ export const Amount = ({ handlerAmount, defaultValue, updatedValue }) => {
         onChange={(e) => {
           const newAmount = parseInt(e.target.value);
           setAmount(newAmount);
-          handlerAmount(newAmount);
+          dispatchHandlerAmount(newAmount);
         }}
         onBlur={(e) => {
-          const amount = e.target.value;
-          e.target.value = parseInt(amount < 1 ? 1 : amount);
+          const amount = parseInt(e.target.value);
+          e.target.value = (!amount ? 1 : amount).toString();
           setAmount(parseInt(e.target.value));
-          handlerAmount(parseInt(e.target.value));
+          dispatchHandlerAmount(parseInt(e.target.value));
         }}
       ></input>
       <button
@@ -41,7 +55,7 @@ export const Amount = ({ handlerAmount, defaultValue, updatedValue }) => {
         onClick={() => {
           const newAmount = amount + 1;
           setAmount(newAmount);
-          handlerAmount(newAmount);
+          dispatchHandlerAmount(newAmount);
         }}
       >
         +

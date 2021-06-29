@@ -18,7 +18,11 @@ const sortingOptions = [
 ];
 
 export const hardcodedClientApi = {
-  getProducts: (filter, type, sortby) => {
+  getProducts: async (
+    filter: string | number,
+    type: string,
+    sortby: number,
+  ) => {
     let url = '';
     switch (type) {
       case 'category':

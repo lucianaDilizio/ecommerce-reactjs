@@ -5,9 +5,12 @@ import { Amount } from '../Product/Amount/Amount';
 import { updateAmount, removeFromCart } from '../actions/cartActions';
 import './Cart.css';
 import { Link } from 'react-router-dom';
+import { ICartState } from '../../models';
 
 const CartProductList = () => {
-  const { currentCart } = useSelector((state) => state.cart);
+  const { currentCart } = useSelector(
+    (state: { cart: ICartState }) => state.cart,
+  );
   const dispatch = useDispatch();
   if (!currentCart.length) return <NoProductsFound />;
   return (

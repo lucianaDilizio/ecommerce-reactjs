@@ -1,7 +1,7 @@
 import React from 'react';
 import './Header.css';
 
-export const Header = ({ children }) => {
+export const Header: React.FC<{}> = ({ children }) => {
   return (
     <div className="container header">
       <div className="rowflex">{children}</div>
