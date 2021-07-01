@@ -9,8 +9,8 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import Payment from './components/Payment/Payment';
 
 const w: any = window;
-const devtools: any = w.devToolsExtension
-  ? w.devToolsExtension()
+const devtools: any = w.__REDUX_DEVTOOLS_EXTENSION__
+  ? w.__REDUX_DEVTOOLS_EXTENSION__()
   : (f: any) => f;
 
 const store = createStore(
