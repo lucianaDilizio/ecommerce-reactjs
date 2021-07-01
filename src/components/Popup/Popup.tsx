@@ -5,7 +5,7 @@ export const Popup = ({
   children,
   handleShowPopup,
 }: {
-  children: React.FC<{}>;
+  children: any;
   handleShowPopup: (argument: boolean) => void;
 }) => {
   return (

@@ -2,11 +2,17 @@ export interface IProduct {
   id: number;
   name: string;
   price: number;
-  image: string;
+  image?: string;
+  amount: number;
+}
+
+export interface IFilter {
+  type: string;
+  filter: string | number;
 }
 
 export interface IFilterState {
-  filter: { currentFilter: { type: string; filter: string | number } };
+  filter: { currentFilter: IFilter };
 }
 
 export interface IProductsState {

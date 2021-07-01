@@ -1,9 +1,11 @@
+import { IProduct } from '../../models';
+
 export const ADD_TO_CART = 'ADD_TO_CART';
 export const REMOVE_FROM_CART = 'REMOVE_FROM_CART';
 export const UPDATE_PRODUCT_AMOUNT = 'UPDATE_PRODUCT_AMOUNT';
 export const EMPTY_CART = 'EMPTY_CART';
 
-export const addToCart = (product) => {
+export const addToCart = (product: IProduct) => {
   return {
     type: ADD_TO_CART,
     payload: {
@@ -15,17 +17,17 @@ export const addToCart = (product) => {
   };
 };
 
-export const removeFromCart = (id) => {
+export const removeFromCart = (product: IProduct) => {
   return {
     type: REMOVE_FROM_CART,
-    payload: id,
+    payload: product,
   };
 };
 
-export const updateAmount = (productId, amount) => {
+export const updateAmount = (product: IProduct) => {
   return {
     type: UPDATE_PRODUCT_AMOUNT,
-    payload: { productId, amount },
+    payload: product,
   };
 };
 

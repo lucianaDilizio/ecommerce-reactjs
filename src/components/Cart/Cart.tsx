@@ -3,9 +3,12 @@ import { Popup } from '../Popup/Popup';
 import './Cart.css';
 import CartProductList from './CartProductList';
 import { useSelector } from 'react-redux';
+import { ICartState } from '../../models';
 
 const Cart = () => {
-  const { currentCart } = useSelector((state) => state.cart);
+  const { currentCart } = useSelector(
+    (state: { cart: ICartState }) => state.cart,
+  );
   const [showPopup, setShowPopup] = useState(false);
 
   return (

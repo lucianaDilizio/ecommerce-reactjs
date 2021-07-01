@@ -39,7 +39,9 @@ const CartProductList = () => {
                         <td>
                           <Amount
                             handlerAmount={(amount) =>
-                              dispatch(updateAmount(product.id, amount))
+                              dispatch(
+                                updateAmount({ ...product, amount: amount }),
+                              )
                             }
                             defaultValue={1}
                             updatedValue={product.amount}
@@ -56,7 +58,7 @@ const CartProductList = () => {
                   <span
                     className="delete-icon"
                     title="Delete item"
-                    onClick={() => dispatch(removeFromCart(product.id))}
+                    onClick={() => dispatch(removeFromCart(product))}
                   >
                     X
                   </span>
