@@ -17,13 +17,7 @@ const ProductList = () => {
   );
 
   useEffect(() => {
-    dispatch(
-      getProducts(
-        currentFilter.filter,
-        currentFilter.type,
-        currentSorting.sortBy,
-      ),
-    );
+    dispatch(getProducts(currentFilter, currentSorting.sortBy));
   }, [currentSorting, currentFilter.filter, currentFilter.type]);
 
   if (loading) return <Loading />;
