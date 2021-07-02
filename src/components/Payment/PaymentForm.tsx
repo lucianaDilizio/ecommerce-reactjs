@@ -2,7 +2,15 @@ import React from 'react';
 import './Payment.css';
 import { Formik } from 'formik';
 
-const PaymentForm = ({ setSuccesfulPayment }) => {
+interface IProps {
+  setSuccesfulPayment: (argument: boolean) => void;
+}
+
+interface IValues {
+  [key: string]: string;
+}
+
+const PaymentForm = ({ setSuccesfulPayment }: IProps) => {
   const months = [
     'January',
     'February',
@@ -31,9 +39,9 @@ const PaymentForm = ({ setSuccesfulPayment }) => {
         month: 'January',
         year: '',
       }}
-      validate={(values) => {
-        const errors = {};
-        Object.keys(values).map((valueKey) => {
+      validate={(values: IValues) => {
+        const errors: IValues = {};
+        Object.keys(values).map((valueKey: string) => {
           if (!values[valueKey]) {
             errors[valueKey] = 'This field is required.';
           }
@@ -159,7 +167,7 @@ const PaymentForm = ({ setSuccesfulPayment }) => {
                 <input
                   type="text"
                   placeholder="Card Number"
-                  maxLength="16"
+                  maxLength={16}
                   name="cardNumber"
                   value={values.cardNumber}
                   onChange={handleChange}
@@ -178,7 +186,7 @@ const PaymentForm = ({ setSuccesfulPayment }) => {
               <input
                 type="text"
                 name="cvv"
-                maxLength="3"
+                maxLength={3}
                 placeholder="cvv"
                 value={values.cvv}
                 onChange={handleChange}
@@ -216,7 +224,7 @@ const PaymentForm = ({ setSuccesfulPayment }) => {
                   <input
                     type="text"
                     name="year"
-                    maxLength="4"
+                    maxLength={4}
                     placeholder="Year"
                     value={values.year}
                     onChange={handleChange}

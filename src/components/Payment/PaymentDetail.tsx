@@ -2,9 +2,12 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { Redirect } from 'react-router';
 import './Payment.css';
+import { ICartState } from '../../models';
 
 const PaymentDetail = () => {
-  const { currentCart } = useSelector((state) => state.cart);
+  const { currentCart } = useSelector(
+    (state: { cart: ICartState }) => state.cart,
+  );
 
   if (!currentCart.length) {
     return <Redirect to="/" />;

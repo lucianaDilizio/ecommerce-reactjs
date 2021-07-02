@@ -1,3 +1,5 @@
+import { IFilter } from '../models';
+
 const sortingOptions = [
   {
     id: 1,
@@ -18,29 +20,29 @@ const sortingOptions = [
 ];
 
 export const hardcodedClientApi = {
-  getProducts: (filter, type, sortby) => {
+  getProducts: async (filter: IFilter, sortby: number) => {
     let url = '';
-    switch (type) {
+    switch (filter.type) {
       case 'category':
         switch (sortby) {
           case 1:
             url = `https://60b6edcd17d1dc0017b889b5.mockapi.io${
-              filter ? `/categories/${filter}/` : '/'
+              filter.filter ? `/categories/${filter.filter}/` : '/'
             }products?sortBy=name&order=asc`;
             break;
           case 2:
             url = `https://60b6edcd17d1dc0017b889b5.mockapi.io${
-              filter ? `/categories/${filter}/` : '/'
+              filter.filter ? `/categories/${filter.filter}/` : '/'
             }products?sortBy=name&order=desc`;
             break;
           case 3:
             url = `https://60b6edcd17d1dc0017b889b5.mockapi.io/${
-              filter ? `/categories/${filter}/` : '/'
+              filter.filter ? `/categories/${filter.filter}/` : '/'
             }products?sortBy=price&order=asc`;
             break;
           case 4:
             url = `https://60b6edcd17d1dc0017b889b5.mockapi.io/${
-              filter ? `/categories/${filter}/` : '/'
+              filter.filter ? `/categories/${filter.filter}/` : '/'
             }products?sortBy=price&order=desc`;
             break;
           default:
@@ -60,7 +62,8 @@ export const hardcodedClientApi = {
       case 'text':
       default:
         return fetch(
-          'https://60b6edcd17d1dc0017b889b5.mockapi.io/products?name=' + filter,
+          'https://60b6edcd17d1dc0017b889b5.mockapi.io/products?name=' +
+            filter.filter,
         )
           .then((response) => response.json())
           .then((products) => {

@@ -2,11 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { hardcodedClientApi } from '../../services/data-client';
 import { updateFilter } from '../actions/filtersActions';
 import { useSelector, useDispatch } from 'react-redux';
+import { IFilterState } from '../../models';
 
 const Categories = () => {
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
-  const { currentFilter } = useSelector((state) => state.filter);
+  const { currentFilter } = useSelector((state: IFilterState) => state.filter);
   const [selectedCategory, setSelectedCategory] = useState(
     currentFilter.filter,
   );
